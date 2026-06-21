@@ -1,0 +1,41 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Ambiente virtual (Poetry in-project) ---
+.venv/
+
+# --- Ferramentas / caches ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# --- MLflow ---
+mlruns/
+mlartifacts/
+
+# --- Dados (não versionados; manter só .gitkeep) ---
+data/raw/*
+data/interim/*
+data/processed/*
+!data/**/.gitkeep
+
+# --- Modelos serializados (artefatos pesados; manter só .gitkeep) ---
+models/*
+!models/.gitkeep
+
+# --- Segredos / ambiente ---
+.env
+.env.*
+!.env.example
+
+# --- IDE / SO ---
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,25 @@
+# pyproject.toml — dependências do projeto (Poetry).
+# Começamos com o mínimo para a EDA e o baseline. Ferramentas de engenharia
+# (ruff, pytest, FastAPI, PyTorch) entram nos marcos em que forem necessárias.
+
+[tool.poetry]
+name = "churn-mlp"
+version = "0.1.0"
+description = "Previsão de churn em telecom — Tech Challenge Fase 01 (FIAP ML Eng)"
+authors = ["Alessandro Stefani <stefani.alessandro@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2"
+scikit-learn = "^1.5"
+matplotlib = "^3.9"
+seaborn = "^0.13"
+mlflow = "^2.16"
+jupyterlab = "^4.2"
+ipykernel = "^6.29"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

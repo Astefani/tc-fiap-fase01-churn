@@ -22,13 +22,11 @@ mlartifacts/
 
 # --- Dados (não versionados; manter só .gitkeep) ---
 data/raw/*
-data/interim/*
-data/processed/*
 !data/**/.gitkeep
 
-# --- Modelos serializados (artefatos pesados; manter só .gitkeep) ---
-models/*
-!models/.gitkeep
+# --- Sincronização Mac <-> Ubuntu via SyncThing (fora do Git) ---
+# Contexto/handoff entre as máquinas; não faz parte do entregável.
+diversos/
 
 # --- Segredos / ambiente ---
 .env

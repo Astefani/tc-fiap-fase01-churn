@@ -26,11 +26,11 @@ no Marco 3, junto da refatoração — como num fluxo real de quem começa pelo 
 
 ### Marco 1 — Entendimento e Preparação · Etapa 1 (Disc. 01–02)
 - [ ] ML Canvas (stakeholders, métricas de negócio, SLOs)
-- [ ] Download do dataset Telco para `data/raw/`
-- [ ] EDA completa (volume, qualidade, distribuição, data readiness)
-- [ ] Definir métrica técnica (AUC-ROC / PR-AUC / F1) e de negócio (custo de churn evitado)
-- [ ] Baselines: `DummyClassifier` + Regressão Logística
-- [ ] Primeiro tracking no MLflow (parâmetros, métricas, versão do dataset)
+- [x] Download do dataset Telco para `data/raw/`
+- [x] EDA completa (volume, qualidade, distribuição, data readiness)
+- [x] Definir métrica técnica (AUC-ROC / PR-AUC / F1) e de negócio (custo de churn evitado)
+- [x] Baselines: `DummyClassifier` + Regressão Logística
+- [x] Primeiro tracking no MLflow (parâmetros, métricas, versão do dataset) — *refinar: faltam params + versão do dataset*
 
 **Entregável:** notebook de EDA + baselines registrados no MLflow.
 

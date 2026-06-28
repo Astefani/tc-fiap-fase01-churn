@@ -68,16 +68,10 @@ comportamento de churn, a variável foi excluída por precaução metodológica.
 ### Redundância
 
 **ZipCode**
-Removida por representar a mesma informação geográfica já disponível em Latitude e Longitude.
-A variável apresenta alta cardinalidade (1.626 valores distintos), o que exigiria estratégias
-adicionais de codificação sem ganho informacional evidente sobre as coordenadas. Latitude e
-Longitude foram mantidas por preservarem a informação espacial em formato numérico contínuo,
-mais adequado aos algoritmos avaliados.
+Removida por representar a mesma informação geográfica já disponível em Latitude e Longitude. A variável apresenta alta cardinalidade (1.626 valores distintos), o que exigiria estratégias adicionais de codificação sem ganho informacional evidente sobre as coordenadas. Latitude e Longitude foram mantidas por preservarem a informação espacial em formato numérico contínuo, mais adequado aos algoritmos avaliados.
 
 **SeniorCitizen e Under30**
-Removidas por serem transformações determinísticas da variável Age. Como a idade já está
-disponível em formato contínuo, manteve-se apenas a variável original, evitando redundância e
-preservando o maior nível de informação possível.
+Removidas por serem transformações determinísticas da variável Age. Como a idade já está disponível em formato contínuo, manteve-se apenas a variável original, evitando redundância e preservando o maior nível de informação possível.
 
 **TotalRevenue**
 Removida por corresponder a uma agregação determinística de TotalCharges,
@@ -93,6 +87,14 @@ Cable). Manteve-se a variável mais informativa.
 **City**
 Removida por alta cardinalidade e por ser redundante com a informação geográfica já capturada
 por Latitude e Longitude.
+
+**ReferredaFriend**
+Removida por ser transformação determinística da variável Number_of_Referrals (`ReferredaFriend = "Yes"` equivale a `Number_of_Referrals > 0`). Como a quantidade de indicações já está disponível em formato contínuo, manteve-se apenas a variável original, evitando redundância e preservando o maior nível de informação possível. A presença das duas no baseline gerou coeficientes colineares (sinais opostos e grandes), confirmando a redundância.
+
+**Dependents**
+Removida por ser transformação determinística da variável NumberofDependents (`Dependents = "Yes"` equivale a `NumberofDependents > 0`). Como a quantidade de dependentes já está disponível em formato contínuo, manteve-se apenas a variável original, evitando redundância e preservando o maior nível de informação possível.
+
+
 
 
 ### Valor constante
@@ -142,6 +144,8 @@ parte do significado de negócio da variável, e não falha de preenchimento. Im
 | TotalRevenue      | Removida | Redundância (agregação determinística)          |
 | InternetService   | Removida | Redundância (InternetType é mais detalhada)     |
 | City              | Removida | Alta cardinalidade / geo redundante             |
+| ReferredaFriend   | Removida | Redundância (derivada de Number_of_Referrals)   |
+| Dependents        | Removida | Redundância (derivada de NumberofDependents)    |
 | Country           | Removida | Valor constante                                 |
 | State             | Removida | Valor constante                                 |
 | Quarter           | Removida | Valor constante                                 |

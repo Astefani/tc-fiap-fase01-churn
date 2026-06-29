@@ -39,6 +39,7 @@ no Marco 3, junto da refatoração — como num fluxo real de quem começa pelo 
 - [x] Loop de treino com early stopping e batching
 - [x] Comparar MLP × baselines (≥ 4 métricas) — test set alinhado (64/16/20, mesmo 20% de teste que NB01)
 - [x] Análise de trade-off de custo (falso positivo × falso negativo) — threshold ótimo ~0,27 (razão FN/FP 10:1)
+- [x] **Validação cruzada estratificada dirigindo a seleção** de hiperparâmetros — `02-modelo-mlp-cv.ipynb` (StratifiedKFold, 5 folds, no treino de 64%; melhor candidato pela média de PR-AUC; hold-out reportado 1×)
 - [x] Registrar todos os experimentos no MLflow
 
 **Entregável:** tabela comparativa + MLP treinado + artefatos no MLflow.
@@ -50,15 +51,34 @@ no Marco 3, junto da refatoração — como num fluxo real de quem começa pelo 
 > Falta: atualizar markdowns do NB01 (números antigos) e ML Canvas (Marco 1).
 > Plano das Etapas 3-4 em `docs/plano-etapas-3-4.md`.
 
+> **Atualização (2026-06-29):** `notebooks/02-modelo-mlp-cv.ipynb` — a **validação cruzada
+> estratificada passou a dirigir a seleção** de hiperparâmetros (`StratifiedKFold`, 5 folds, sobre o
+> **treino de 64%**; melhor candidato pela média de PR-AUC; hold-out de 20% reportado 1×), corrigindo
+> o viés de selecionar pelo conjunto de teste. Loop reproduzível + runs `cv_*`/`mlp_final_*` no
+> MLflow. A versão anterior (`02-modelo-mlp.ipynb`) foi mantida intacta.
+> **Resultado (clean run, salvo c/ outputs):** vencedor por CV **`mlp_ba64`** (`[64,32]`, batch 64 —
+> CV PR-AUC 0,7676 ± 0,0122; hold-out 0,7805, recall 0,864); empate ~0,75–0,77 com LogReg/RF; MLP
+> mais barata no custo ($25.250 @ t≈0,26). A CV com dados limpos preferiu a rede menor (`dif_pr_auc`
+> 0,037 vs 0,081 da rede maior), o que **resolve a regra do 1-desvio**. Pendentes: espelhar a CV no
+> NB01 (mesmo k/seed); decidir o notebook oficial.
+
 ### Marco 3 — Engenharia e API · Etapa 3 (Disc. 03–05)
-- [ ] Refatorar do notebook para módulos em `src/` (estrutura limpa, SOLID)
-- [ ] Pipeline reprodutível (sklearn + transformadores custom)
-- [ ] Testes pytest: smoke, schema (pandera), API
-- [ ] API FastAPI: `/predict`, `/health`, validação Pydantic
-- [ ] Logging estruturado (sem `print()`) + middleware de latência
-- [ ] `pyproject.toml`, ruff sem erros, Makefile (lint, test, run)
+- [x] Refatorar do notebook para módulos em `src/churn/` (estrutura limpa, SOLID)
+- [x] Pipeline reprodutível (sklearn + transformador custom `FeatureEngineer`; MLP no Pipeline via wrapper)
+- [x] Testes pytest: smoke, schema (pandera), API *(escritos; rodam após a Fase E)*
+- [x] API FastAPI: `/predict`, `/predict_batch`, `/health`, validação Pydantic
+- [x] Logging estruturado (sem `print()`) + middleware de latência
+- [x] `pyproject.toml`, ruff sem erros, Makefile (lint, test, run) — Fase E ✅ (ruff limpo, pytest 8/8)
 
 **Entregável:** repositório refatorado + API funcional + testes passando.
+
+> **Atualização (2026-06-29):** Etapa 3 **CONCLUÍDA** (no Ubuntu). Pipeline único serializável
+> (`FeatureEngineer → ColumnTransformer → TorchMLPClassifier`) salvo em `models/pipeline.joblib`,
+> servindo **batch** (campanhas) e **sob demanda** (API) do mesmo artefato. Fases A–E ✅;
+> **`make train` executado** → gera `pipeline.joblib` + `reference_profile.json` + `threshold.json`
+> + run MLflow; **ruff limpo**, **pytest 8/8**; API com rota `/` → `/docs`; **threshold operacional
+> viaja com o artefato** (`threshold.json`, fallback em `config.DECISION_THRESHOLD`). Detalhes em
+> `diversos/etapa3-implementacao.md`. **Falta só o commit no Mac.**
 
 ### Marco 4 — Documentação e Entrega · Etapa 4
 - [ ] Model Card (performance, limitações, vieses, cenários de falha)

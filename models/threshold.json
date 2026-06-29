@@ -1,0 +1,6 @@
+{
+  "threshold": 0.135,
+  "custo": 26700,
+  "custo_fn": 500,
+  "custo_fp": 50
+}

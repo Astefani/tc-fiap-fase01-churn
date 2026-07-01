@@ -7,6 +7,7 @@
 **Versão:** 0.1.0  
 **Data:** 2026-06-29  
 **Autor:** Alessandro Stefani  
+**Repositório:** https://github.com/Astefani/tc-fiap-fase01-churn  
 **Tipo:** classificação binária (churn: sim/não)
 **Saída:** probabilidade ∈ [0,1] + decisão no threshold operacional
 **Artefato:** `models/pipeline.joblib` (`FeatureEngineer → ColumnTransformer → TorchMLPClassifier`)

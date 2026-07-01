@@ -1,7 +1,8 @@
 # ML Canvas — Churn Telecom (TC Fase 01)
 
 **Autor:** Alessandro Stefani  
-**Disciplina:** Tech Challenge — Fase 01 (Produtização de Modelos)
+**Disciplina:** Tech Challenge — Fase 01 (Produtização de Modelos)  
+**Repositório:** https://github.com/Astefani/tc-fiap-fase01-churn
 
 ---
 
